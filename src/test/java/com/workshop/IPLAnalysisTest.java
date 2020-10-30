@@ -160,4 +160,20 @@ public class IPLAnalysisTest {
 		List<BowlingStats> sortedByAverage = analyser.getBestBowlingAverage();
 		assertEquals("Anukul Roy", sortedByAverage.get(0).player);
 	}
+	
+	/**
+	 * UC7
+	 * Test for getting high strike rate bowlers
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenBowlingStatistics_WhenSortedByStrikeRate_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
+		List<BowlingStats> sortedByStrikeRate = analyser.getBestBowlingStrikeRate();
+		assertEquals("Alzarri Joseph", sortedByStrikeRate.get(0).player);
+	}
 }

@@ -113,6 +113,18 @@ public class IPLAnalysis {
 		return this.sort(bowlCsvList, statComparator);
 	}
 	
+	/**
+	 * UC8 Get Highest Bowler with Highest Strike Rate
+	 * @param <E>
+	 * @return
+	 * @throws StatisticsAnalyserException
+	 */
+	public <E>List getBestBowlingStrikeRate() throws IPLAnalyserException {
+		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
+		bowlCsvList.removeIf(stat -> stat.strikeRate == 0);
+		return this.sort(bowlCsvList, statComparator);
+	}
+	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
 		if(statList == null || statList.size() == 0) {
 			throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_STATISTICS_DATA);
