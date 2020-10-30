@@ -119,7 +119,7 @@ public class IPLAnalysis {
 	 * @return
 	 * @throws StatisticsAnalyserException
 	 */
-	public <E>List getBestBowlingStrikeRate() throws IPLAnalyserException {
+	public <E> List getBestBowlingStrikeRate() throws IPLAnalyserException {
 		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
 		bowlCsvList.removeIf(stat -> stat.strikeRate == 0);
 		return this.sort(bowlCsvList, statComparator);
@@ -131,8 +131,20 @@ public class IPLAnalysis {
 	 * @return
 	 * @throws StatisticsAnalyserException
 	 */
-	public <E>List getBestBowlingEconomy() throws IPLAnalyserException {
+	public <E> List getBestBowlingEconomy() throws IPLAnalyserException {
 		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.economy) );
+		return this.sort(bowlCsvList, statComparator);
+	}
+	
+	/**
+	 * UC10 Get Bowler with Best Strike Rate of 4 Wickets and 5 Wickets
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
+	public <E> List getBestBowlingStrikeRateWithMore4WAnd5W() throws IPLAnalyserException {
+		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
+		bowlCsvList.removeIf(stat -> (stat.strikeRate == 0 || (stat.fourWickets == 0 && stat.fiveWickets == 0)));
 		return this.sort(bowlCsvList, statComparator);
 	}
 	
