@@ -58,6 +58,15 @@ public class IPLAnalysisTest {
 		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
 		List<BattingStats> sortedCensusData = analyser.getBestBattingAverage();
 		assertEquals("MS Dhoni", sortedCensusData.get(0).player);
-		}
+	}
+	
+	@Test
+	public void givenBattingStatistics_WhenSortedByStrikeRate_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		List<BattingStats> sortedByStrikeRate = analyser.getBestStrikeRate();
+		assertEquals("Ishant Sharma", sortedByStrikeRate.get(0).player);
+	}
 
 }

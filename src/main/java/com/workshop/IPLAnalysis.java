@@ -30,10 +30,28 @@ public class IPLAnalysis {
 		return bowlCsvList.size();
 	}
 	
+	/**
+	 * UC1 Best Average
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
 	public <E> List getBestBattingAverage() throws IPLAnalyserException{
 		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.average) );
 		return this.sort(batCsvList, statComparator.reversed());
 	}
+	
+	/**
+	 * UC2 Best Strike Rate
+	 * @param <E>
+	 * @return
+	 * @throws StatisticsAnalyserException
+	 */
+	public <E>List getBestStrikeRate() throws IPLAnalyserException {
+		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
+		return this.sort(batCsvList, statComparator.reversed());
+	}
+	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
 		if(statList == null || statList.size() == 0) {
 			throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_STATISTICS_DATA);
