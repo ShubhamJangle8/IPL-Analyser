@@ -128,4 +128,21 @@ public class IPLAnalysisTest {
 		assertEquals("Andre Russell", sortedByStrikeRateAndBestAverage.get(0).player);
 	}
 	
+	/**
+	 * UC6
+	 * Test for high scoring batsmen with high averages
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenBattingStatistics_WhenSortedByMaximumRunsAndBestBattingAverage_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		List<BattingStats> sortedByMaximumRunsAndBestAverage = analyser.getMaximumRunsWithBestAverage();
+		sortedByMaximumRunsAndBestAverage.forEach(s->System.out.println(s.player));
+		assertEquals("MS Dhoni", sortedByMaximumRunsAndBestAverage.get(0).player);
+	}
+	
 }

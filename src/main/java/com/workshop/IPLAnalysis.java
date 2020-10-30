@@ -82,10 +82,23 @@ public class IPLAnalysis {
 	 * @return
 	 * @throws IPLAnalyserException
 	 */
-	public <E>List getBestAverageAndStrikeRate() throws IPLAnalyserException {
+	public <E> List getBestAverageAndStrikeRate() throws IPLAnalyserException {
 		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
 		List<BattingStats> strikeRate = getBestBattingAverage();
 		return this.sort(strikeRate.stream().limit(20).collect(Collectors.toList()), statComparator.reversed());
+	}
+	
+	/**
+	 * UC6 Get Highest Run Scoring Batsmen With High Averages
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
+	public <E> List getMaximumRunsWithBestAverage() throws IPLAnalyserException {
+		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.runs) );
+		Comparator<BattingStats> statAvgComparator = Comparator.comparing(stat -> (stat.average) );
+		List<BattingStats> maximumRuns = this.sort(batCsvList, statComparator.reversed());
+		return this.sort(maximumRuns.stream().limit(20).collect(Collectors.toList()), statAvgComparator.reversed());
 	}
 	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
