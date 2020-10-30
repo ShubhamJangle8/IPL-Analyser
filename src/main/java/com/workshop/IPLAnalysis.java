@@ -125,6 +125,17 @@ public class IPLAnalysis {
 		return this.sort(bowlCsvList, statComparator);
 	}
 	
+	/**
+	 * UC9 Get Bowler with Best Economy Rate
+	 * @param <E>
+	 * @return
+	 * @throws StatisticsAnalyserException
+	 */
+	public <E>List getBestBowlingEconomy() throws IPLAnalyserException {
+		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.economy) );
+		return this.sort(bowlCsvList, statComparator);
+	}
+	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
 		if(statList == null || statList.size() == 0) {
 			throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_STATISTICS_DATA);
