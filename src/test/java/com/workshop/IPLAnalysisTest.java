@@ -90,6 +90,26 @@ public class IPLAnalysisTest {
 		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
 		List<BattingStats> sortedByBoundaries = analyser.getMostBoundaries();
 		assertEquals("Andre Russell", sortedByBoundaries.get(0).player);
+	}
+	
+	/**
+	 * UC4
+	 * Test for Most 4s and 6s with high strike rates
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenBattingStatistics_WhenSortedByBestStrikeRatesWithBoundaries_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		List<BattingStats> sortedByStrikeRateAndBoundaries = analyser.getBestStrikeRateWithBoundaries();
+		for(BattingStats s: sortedByStrikeRateAndBoundaries)
+		{
+			System.out.println(s.player);
 		}
+		assertEquals("Ishant Sharma", sortedByStrikeRateAndBoundaries.get(0).player);
+	}
 
 }

@@ -63,6 +63,18 @@ public class IPLAnalysis {
 		return this.sort(batCsvList, statComparator.reversed());
 	}
 	
+	/**
+	 * UC4 Get Most Boundary Hitting Players With High Strike Rates
+	 * @param <E>
+	 * @return
+	 * @throws StatisticsAnalyserException
+	 */
+	public <E>List getBestStrikeRateWithBoundaries() throws IPLAnalyserException {
+		batCsvList.removeIf(s->(s.fours+s.sixes)==0);
+		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.bf / (stat.fours + stat.sixes)));
+		return this.sort(batCsvList,  statComparator);
+	}
+	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
 		if(statList == null || statList.size() == 0) {
 			throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_STATISTICS_DATA);
