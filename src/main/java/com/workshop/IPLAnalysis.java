@@ -154,10 +154,23 @@ public class IPLAnalysis {
 	 * @return
 	 * @throws StatisticsAnalyserException
 	 */
-	public <E>List getBestBowlingAverageAndStrikeRate() throws IPLAnalyserException {
+	public <E> List getBestBowlingAverageAndStrikeRate() throws IPLAnalyserException {
 		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
 		List<BowlingStats> strikeRate = getBestBowlingAverage();
 		return this.sort(strikeRate.stream().limit(20).collect(Collectors.toList()), statComparator);
+	}
+	
+	/**
+	 * UC12 Get Bowler with High Wicket Takers with best averages
+	 * @param <E>
+	 * @return
+	 * @throws StatisticsAnalyserException
+	 */
+	public <E> List getMaximumWicketsWithBestAverage() throws IPLAnalyserException {
+		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.wickets) );
+		Comparator<BowlingStats> statAvgComparator = Comparator.comparing(stat -> (stat.average) );
+		List<BowlingStats> maximumWickets = this.sort(bowlCsvList, statComparator.reversed());
+		return this.sort(maximumWickets.stream().limit(20).collect(Collectors.toList()), statAvgComparator);
 	}
 	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {

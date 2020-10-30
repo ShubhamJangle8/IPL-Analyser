@@ -209,6 +209,13 @@ public class IPLAnalysisTest {
 		assertEquals("Alzarri Joseph", sortedByStrikeRateAndHauls.get(0).player);
 	}
 	
+	/**
+	 * UC11
+	 * Test for getting high strike rate bowlers with 4W and 5W with best averages
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
 	@Test
 	public void givenBowlingStatistics_WhenSortedByBestAverageWithBestStrikeRate_ShouldReturnSortedResult()
 			throws IOException, IPLAnalyserException, CSVBuilderException {
@@ -216,6 +223,22 @@ public class IPLAnalysisTest {
 		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
 		List<BowlingStats> sortedByStrikeRateAndBestAverage = analyser.getBestBowlingAverageAndStrikeRate();
 		assertEquals("Alzarri Joseph", sortedByStrikeRateAndBestAverage.get(0).player);
+	}
+	
+	/**
+	 * UC12
+	 * Test for getting high wicket takers with best averages
+	 * @throws IOException
+	 * @throws StatisticsAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenBowlingStatistics_WhenSortedByMaximumWicketsWithBestAverage_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
+		List<BowlingStats> sortedByMaximumWicketsAndBestAverage = analyser.getMaximumWicketsWithBestAverage();
+		assertEquals("Kagiso Rabada", sortedByMaximumWicketsAndBestAverage.get(0).player);
 	}
 	
 }
