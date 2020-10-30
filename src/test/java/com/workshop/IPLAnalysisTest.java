@@ -1,7 +1,9 @@
 package com.workshop;
 
 import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
+import java.util.List;
 import org.junit.Test;
 import IPLAnalysing.CSVBuilderException;
 
@@ -26,8 +28,6 @@ public class IPLAnalysisTest {
 		}
 	}
 	
-	
-
 	/**
 	 * UC2
 	 * Test for a proper count of records for Bowl Stats CSV
@@ -44,7 +44,20 @@ public class IPLAnalysisTest {
 		}
 	}
 	
-	
-	
+	/**
+	 * UC3
+	 * Test for getting the highest average player
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenBattingStatistics_WhenSortedByAverage_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		List<BattingStats> sortedCensusData = analyser.getBestBattingAverage();
+		assertEquals("MS Dhoni", sortedCensusData.get(0).player);
+		}
 
 }
