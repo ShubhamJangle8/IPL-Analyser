@@ -47,8 +47,19 @@ public class IPLAnalysis {
 	 * @return
 	 * @throws StatisticsAnalyserException
 	 */
-	public <E>List getBestStrikeRate() throws IPLAnalyserException {
+	public <E> List getBestStrikeRate() throws IPLAnalyserException {
 		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
+		return this.sort(batCsvList, statComparator.reversed());
+	}
+	
+	/**
+	 * UC3 Get Most Boundary Players
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
+	public <E> List getMostBoundaries() throws IPLAnalyserException {
+		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.fours + stat.sixes) );
 		return this.sort(batCsvList, statComparator.reversed());
 	}
 	

@@ -13,7 +13,7 @@ public class IPLAnalysisTest {
 	private static final String BOWL_STATS_CSV_FILE_PATH = "C://Users//DELL//eclipse-workspace//IPLAnalysisProblem//MostWickets.csv";
 	
 	/**
-	 * UC1
+	 * start
 	 * Test 1 for a correct count for Bat Stats CSV
 	 * @throws IOException
 	 * @throws CSVBuilderException 
@@ -29,7 +29,7 @@ public class IPLAnalysisTest {
 	}
 	
 	/**
-	 * UC2
+	 * start
 	 * Test for a proper count of records for Bowl Stats CSV
 	 * @throws IOException
 	 * @throws CSVBuilderException 
@@ -45,7 +45,7 @@ public class IPLAnalysisTest {
 	}
 	
 	/**
-	 * UC3
+	 * UC1
 	 * Test for getting the highest average player
 	 * @throws IOException
 	 * @throws IPLAnalyserException
@@ -60,6 +60,13 @@ public class IPLAnalysisTest {
 		assertEquals("MS Dhoni", sortedCensusData.get(0).player);
 	}
 	
+	/**
+	 * UC2
+	 * Test for getting the highest strikeRate player
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
 	@Test
 	public void givenBattingStatistics_WhenSortedByStrikeRate_ShouldReturnSortedResult()
 			throws IOException, IPLAnalyserException, CSVBuilderException {
@@ -68,5 +75,21 @@ public class IPLAnalysisTest {
 		List<BattingStats> sortedByStrikeRate = analyser.getBestStrikeRate();
 		assertEquals("Ishant Sharma", sortedByStrikeRate.get(0).player);
 	}
+	
+	/**
+	 * UC3
+	 * Test for getting the highest boundaries player
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenBattingStatistics_WhenSortedByMost4sAnd6s_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		List<BattingStats> sortedByBoundaries = analyser.getMostBoundaries();
+		assertEquals("Andre Russell", sortedByBoundaries.get(0).player);
+		}
 
 }
