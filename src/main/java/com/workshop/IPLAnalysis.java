@@ -148,6 +148,18 @@ public class IPLAnalysis {
 		return this.sort(bowlCsvList, statComparator);
 	}
 	
+	/**
+	 * UC11 Get Bowler with Best Strike Rate of 4 Wickets and 5 Wickets with best averages
+	 * @param <E>
+	 * @return
+	 * @throws StatisticsAnalyserException
+	 */
+	public <E>List getBestBowlingAverageAndStrikeRate() throws IPLAnalyserException {
+		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
+		List<BowlingStats> strikeRate = getBestBowlingAverage();
+		return this.sort(strikeRate.stream().limit(20).collect(Collectors.toList()), statComparator);
+	}
+	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
 		if(statList == null || statList.size() == 0) {
 			throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_STATISTICS_DATA);

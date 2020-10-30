@@ -195,7 +195,7 @@ public class IPLAnalysisTest {
 	
 	/**
 	 * UC10
-	 * Test for getting high strike rate bowlers with 4s and 6s
+	 * Test for getting high strike rate bowlers with 4W and 5W
 	 * @throws IOException
 	 * @throws IPLAnalyserException
 	 * @throws CSVBuilderException
@@ -207,6 +207,15 @@ public class IPLAnalysisTest {
 		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
 		List<BowlingStats> sortedByStrikeRateAndHauls = analyser.getBestBowlingStrikeRateWithMore4WAnd5W();
 		assertEquals("Alzarri Joseph", sortedByStrikeRateAndHauls.get(0).player);
+	}
+	
+	@Test
+	public void givenBowlingStatistics_WhenSortedByBestAverageWithBestStrikeRate_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
+		List<BowlingStats> sortedByStrikeRateAndBestAverage = analyser.getBestBowlingAverageAndStrikeRate();
+		assertEquals("Alzarri Joseph", sortedByStrikeRateAndBestAverage.get(0).player);
 	}
 	
 }
