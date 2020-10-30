@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import IPLAnalysing.CSVBuilderException;
 import IPLAnalysing.CSVBuilderFactory;
@@ -73,6 +74,18 @@ public class IPLAnalysis {
 		batCsvList.removeIf(s->(s.fours+s.sixes)==0);
 		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.bf / (stat.fours + stat.sixes)));
 		return this.sort(batCsvList,  statComparator);
+	}
+	
+	/**
+	 * UC5 Get High Strike Rate With High Average Batsmen
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
+	public <E>List getBestAverageAndStrikeRate() throws IPLAnalyserException {
+		Comparator<BattingStats> statComparator = Comparator.comparing(stat -> (stat.strikeRate) );
+		List<BattingStats> strikeRate = getBestBattingAverage();
+		return this.sort(strikeRate.stream().limit(20).collect(Collectors.toList()), statComparator.reversed());
 	}
 	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
