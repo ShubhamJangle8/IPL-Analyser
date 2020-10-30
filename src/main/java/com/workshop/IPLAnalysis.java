@@ -14,28 +14,16 @@ public class IPLAnalysis {
 	List<BowlingStats> bowlCsvList = null;
 	List<BattingStats> batCsvList = null;
 
-//	public int loadBattingStatsData(String csvFilePath) throws IOException, CSVBuilderException, IPLAnalyserException {
-//		try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))){
-//			@SuppressWarnings("unchecked")
-//			ICSVBuilder<BattingStats> csvBuilder = CSVBuilderFactory.createCSVBuilder();
-//			batCsvList = csvBuilder.getCSVFileList(reader, BattingStats.class);
-//			int numberOfEntries = batCsvList.size();
-//			return numberOfEntries;
-//		} catch (RuntimeException e) {
-//			throw new IPLAnalyserException(e.getMessage(), IPLAnalyserException.ExceptionType.INCORRECT_FILE);
-//		} catch (NoSuchFileException e) {
-//			throw new IPLAnalyserException(e.getMessage(), IPLAnalyserException.ExceptionType.NO_FILE);
-//		}
-//	}
-	
 	public int loadBattingStatsData(String csvFile)  throws IOException, CSVBuilderException{		
 			Reader reader = Files.newBufferedReader(Paths.get(csvFile));
+			@SuppressWarnings("unchecked")
 			ICSVBuilder<BattingStats> csvBuilder = CSVBuilderFactory.createCSVBuilder();
 			batCsvList =  csvBuilder.getCSVFileList(reader, BattingStats.class);
 			return batCsvList.size();
 	}
 	public int loadBowlingStatsData(String csvFile)  throws IOException, CSVBuilderException{		
 		Reader reader = Files.newBufferedReader(Paths.get(csvFile));
+		@SuppressWarnings("unchecked")
 		ICSVBuilder<BowlingStats> csvBuilder = CSVBuilderFactory.createCSVBuilder();
 		bowlCsvList =  csvBuilder.getCSVFileList(reader, BowlingStats.class);
 		return bowlCsvList.size();
