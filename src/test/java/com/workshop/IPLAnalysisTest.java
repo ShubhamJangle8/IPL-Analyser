@@ -145,4 +145,19 @@ public class IPLAnalysisTest {
 		assertEquals("MS Dhoni", sortedByMaximumRunsAndBestAverage.get(0).player);
 	}
 	
+	/**
+	 * UC7
+	 * Test for getting high average bowlers
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenBowlingStatistics_WhenSortedByAverage_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
+		List<BowlingStats> sortedByAverage = analyser.getBestBowlingAverage();
+		assertEquals("Anukul Roy", sortedByAverage.get(0).player);
+	}
 }

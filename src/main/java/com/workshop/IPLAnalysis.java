@@ -101,6 +101,18 @@ public class IPLAnalysis {
 		return this.sort(maximumRuns.stream().limit(20).collect(Collectors.toList()), statAvgComparator.reversed());
 	}
 	
+	/**
+	 * UC7 Get Highest Bowling Average Bowler
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
+	public <E> List getBestBowlingAverage() throws IPLAnalyserException {
+		Comparator<BowlingStats> statComparator = Comparator.comparing(stat -> (stat.average) );
+		bowlCsvList.removeIf(stat -> stat.average == 0);
+		return this.sort(bowlCsvList, statComparator);
+	}
+	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
 		if(statList == null || statList.size() == 0) {
 			throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_STATISTICS_DATA);
