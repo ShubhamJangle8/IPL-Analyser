@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -171,6 +172,29 @@ public class IPLAnalysis {
 		Comparator<BowlingStats> statAvgComparator = Comparator.comparing(stat -> (stat.average) );
 		List<BowlingStats> maximumWickets = this.sort(bowlCsvList, statComparator.reversed());
 		return this.sort(maximumWickets.stream().limit(20).collect(Collectors.toList()), statAvgComparator);
+	}
+	
+	/**
+	 * UC13 Test for getting best average players with bowling and batting
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
+	public <E>List getBestBattingAndBowlingAverage() throws IPLAnalyserException {
+		List<String> stat = new ArrayList<String>();
+		List<BattingStats> battingAverage = getBestBattingAverage();
+		battingAverage = battingAverage.stream().limit(50).collect(Collectors.toList());
+		List<BowlingStats> bowlingAverage = getBestBowlingAverage();
+		bowlingAverage = bowlingAverage.stream().limit(50).collect(Collectors.toList());
+		for(BattingStats b: battingAverage ) {
+			for(int i = 0;i < bowlingAverage.size(); i++) {
+				if(b.player.equals(bowlingAverage.get(i).player)) {
+					stat.add(b.player);
+				}
+			}
+		}
+		System.out.println(stat);
+		return stat;
 	}
 	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {

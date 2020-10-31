@@ -241,4 +241,21 @@ public class IPLAnalysisTest {
 		assertEquals("Kagiso Rabada", sortedByMaximumWicketsAndBestAverage.get(0).player);
 	}
 	
+	/**
+	 * UC13
+	 * Test for getting best average players with bowling and batting
+	 * @throws IOException
+	 * @throws IPLAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenStatistics_WhenSortedByBowlingAndBattingAverage_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
+		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		List average = analyser.getBestBattingAndBowlingAverage();
+        assertEquals("Andre Russell", average.get(0));
+	}
+	
 }
