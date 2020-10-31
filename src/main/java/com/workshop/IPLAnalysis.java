@@ -197,6 +197,32 @@ public class IPLAnalysis {
 		return stat;
 	}
 	
+	/**
+	 * UC14 Test for getting best all rounders
+	 * @param <E>
+	 * @return
+	 * @throws IPLAnalyserException
+	 */
+	public <E>List getAllRounder() throws IPLAnalyserException {
+		
+		List<String> stats = new ArrayList<String>();
+		Comparator<BattingStats> statBatComparator = Comparator.comparing(stat -> (stat.runs));
+		Comparator<BowlingStats> statBowlComparator = Comparator.comparing(stat -> (stat.wickets));
+		List<BattingStats> battingAverage = this.sort(batCsvList, statBatComparator);
+		battingAverage = battingAverage.stream().limit(50).collect(Collectors.toList());
+		List<BowlingStats> bowlingAverage = this.sort(bowlCsvList, statBowlComparator);
+		bowlingAverage = bowlingAverage.stream().limit(50).collect(Collectors.toList());
+		for(BattingStats b: battingAverage ) {
+			for(int i = 0;i < bowlingAverage.size(); i++) {
+				if(b.player.equals(bowlingAverage.get(i).player)) {
+					stats.add(b.player);
+				}
+			}
+		}
+		System.out.println(stats);
+		return stats;
+	}
+	
 	private <E> List sort(List<E> statList, Comparator<E> statComparator) throws IPLAnalyserException {
 		if(statList == null || statList.size() == 0) {
 			throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_STATISTICS_DATA);

@@ -252,10 +252,27 @@ public class IPLAnalysisTest {
 	public void givenStatistics_WhenSortedByBowlingAndBattingAverage_ShouldReturnSortedResult()
 			throws IOException, IPLAnalyserException, CSVBuilderException {
 		IPLAnalysis analyser = new IPLAnalysis();
-		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
 		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
 		List average = analyser.getBestBattingAndBowlingAverage();
         assertEquals("Andre Russell", average.get(0));
 	}
+	
+	/**
+	 * UC14
+	 * Test for getting best all rounders
+	 * @throws IOException
+	 * @throws StatisticsAnalyserException
+	 * @throws CSVBuilderException
+	 */
+	@Test
+	public void givenStatistics_WhenSortedByMaximumRunsAndWickets_ShouldReturnSortedResult()
+			throws IOException, IPLAnalyserException, CSVBuilderException {
+		IPLAnalysis analyser = new IPLAnalysis();
+		analyser.loadBattingStatsData(BAT_STATS_CSV_FILE_PATH);
+		analyser.loadBowlingStatsData(BOWL_STATS_CSV_FILE_PATH);
+		List average = analyser.getAllRounder();
+        assertEquals("Shakib Al Hasan", average.get(0));
+		}
 	
 }
